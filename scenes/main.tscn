@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/tiro.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/nave.tscn" type="PackedScene" id=2]
+
+[node name="main" type="Node"]
+
+[node name="tiro" parent="." instance=ExtResource( 1 )]
+position = Vector2( 291.807, 375.758 )
+rotation = 3.14159
+
+[node name="nave" parent="." instance=ExtResource( 2 )]
+position = Vector2( 291.59, 404.967 )
