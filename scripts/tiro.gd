@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -18,3 +18,14 @@ func _process(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_tiro_area_entered(area):
+	if area.is_in_group(game.GRUPO_INIMIGO):
+		if area.has_method("_aplica_dano"):
+			area._aplica_dano(1)
+		else:
+			area.queue_free()
+		queue_free()
+		pass
+	pass # Replace with function body.
