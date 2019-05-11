@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/tiro.gd" type="Script" id=1]
 [ext_resource path="res://sprites/Lasers/laserBlue01.png" type="Texture" id=2]
+[ext_resource path="res://samples/tiro.wav" type="AudioStream" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.77457
@@ -19,4 +20,7 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 3.05176e-05, -11.429 )
 shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 [connection signal="area_entered" from="." to="." method="_on_tiro_area_entered"]

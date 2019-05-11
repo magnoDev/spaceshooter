@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/meteoro.gd" type="Script" id=1]
 [ext_resource path="res://sprites/Meteors/meteorBrown_big1.png" type="Texture" id=2]
@@ -17,7 +17,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0.615686, 0.839216, 0.94902, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 0.960784, 0.227451, 0.227451, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -34,6 +34,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("particles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "morri"
@@ -47,7 +59,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 2, 2 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("sprite:modulate")
@@ -87,6 +99,49 @@ tracks/3/keys = {
 "update": 1,
 "values": [ ExtResource( 2 ), ExtResource( 3 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("particles:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.202381, 0.77381, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 0.872437, 0.628906, 1, 1, 0.65625, 0, 1, 1, 0, 0, 0.196078 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+flag_disable_z = true
+spread = 180.0
+flatness = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 80.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 25.0
+scale_random = 1.0
+scale_curve = SubResource( 7 )
+color_ramp = SubResource( 5 )
+anim_speed = 128.0
+anim_speed_random = 1.0
+anim_offset = 1.0
+anim_offset_random = 1.0
 
 [node name="meteoro" type="Area2D"]
 script = ExtResource( 1 )
@@ -103,3 +158,13 @@ autoplay = "idle"
 anims/hit = SubResource( 1 )
 anims/idle = SubResource( 2 )
 anims/morri = SubResource( 3 )
+
+[node name="particles" type="Particles2D" parent="."]
+emitting = false
+amount = 100
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.85
+randomness = 1.0
+visibility_rect = Rect2( 0, 0, 0, 0 )
+process_material = SubResource( 8 )

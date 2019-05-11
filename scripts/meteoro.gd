@@ -27,8 +27,11 @@ func _aplica_dano(valor):
 	get_node("animacao").play("hit")
 	vida -= valor
 	if vida <= 0:
+		set_process(false)
+		set_z_index(10);
 		remove_from_group(game.GRUPO_INIMIGO)
 		get_node("animacao").play("morri")
+		game.getCamera()._shake()
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

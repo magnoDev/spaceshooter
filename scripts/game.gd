@@ -13,3 +13,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func getCamera():
+	return get_tree().get_root().get_node("main").get_node("camera")
